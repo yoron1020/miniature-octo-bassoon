@@ -1,41 +1,29 @@
 #!/usr/bin/python3
-#configure algorithm
-def algorithm(n):
-	count=0;
-	while n!=1:
-		if n%2!=0: #n is odd
-			n=3*n+1
-			count+=1
-		else: #n is even
-			n=n/2
-			count+=1
-	else:
-		count+=1
-		return count
 
-def cycle_length(i,j):
-	count=0
-	maxNum=0
-	if i>j: #if i is larger than j then swap them
-		#print(i,j)
-		i,j=j,i
-	for num in range(i,j+1):
-		#print(num)
-		count=algorithm(num) #get count for every num
-		if count > maxNum:
-			maxNum=count
-	return maxNum
-	#print(i,j,maxNum)
+import sys
 
-#cycle_length(900,1000)
+cache={1:1}
+
+def get_cycle_length(num):
+	cycle_length=cache.get(num)
+	if cycle_length is None:
+		cycle_length=get_cycle_length(num=num/2 if num%2==0 else 3*num+1)+1
+		cache[num]=cycle_length
+
+	return cycle_length
+
 def main():
-	while True:
-		try:
-			num=input()
-			num_i,num_j=map(int,num.split())
-			print(num_i,num_j,cycle_length(num_i,num_j),end="\n")
-		except:
+	for num in sys.stdin:
+		if not num:
 			break
+		else:
+			num_i,num_j=list(map(int,num.split()))
+			tmp_i,tmp_j=num_i,num_j
+			if num_i > num_j: #swap
+				tmp_i,tmp_j=num_j,num_i
+
+			max_cycle_length=max(list(map(get_cycle_length,range(tmp_i,tmp_j+1))))
+			print(num_i,num_j,max_cycle_length,end="\n")
 
 if __name__ == '__main__':
 	main()
