@@ -1,5 +1,14 @@
 #!/usr/bin/python3
 
+"""
+move a onto b:歸位a上block 歸位b上block 把a放到b上
+move a over b:歸位a上block 把a放到b上
+pile a onto b:歸位b上block 把a和a上面的所有block放到b上
+pile a over b:把a和a上面的所有block放到b上
+
+總共2個動作:歸位x上block 把x和x上所有block放到x'上(如果x上面沒有別的block就會做出"把a放到b上")
+"""
+
 blockList=[]
 
 def _initialBlock(blockNum):
@@ -21,20 +30,6 @@ def _makeList(blockNum):
 		blockList.append([]) #making two dimension array by append [] to the list
 		blockList[i].append(i)
 	#return blockList
-
-
-"""_makeList(10)
-#print(_makeList(25))
-_pileBlock(9,1)
-print(blockList)
-_pileBlock(4,1)
-print(blockList)
-_pileBlock(6,1)
-print(blockList)
-
-_initialBlock(1)
-print(blockList)
-"""
 
 num=int(input())
 _makeList(num)
