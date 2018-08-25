@@ -19,22 +19,29 @@ def _makeList(blockNum):
 		blockList.append([])	#在每個一維陣列的索引再加上一格一維陣列
 		blockList[i].append(i)	#[[0],[1],[2],[3],[4],[5],[6],[7],[8],[9]]
 
+#在blockList裡尋找blockNum的位置
+def _findPosition(blockNum):
+	for i in range(len(blockList)):
+		for j in range(len(blockList[i])):
+			if blockNum==blockList[i][j]:
+				return i,j	
 
 #歸位
 #要先找到blokNum1和blockNum2在二維陣列的位置
-"""
-def _initialBlock(blockNum):  
-	for i in range(len(blockList[blockNum])):	#假設blockNum=5，迴圈的長度就是二維陣列裡第5個索引的一維陣列長度，ex:[[0],[1],[2],[3],[4],[5,6,7,8,9]]，長度是5
+def _initialBlock(blockNum): 
+	i=_findPosition(blockNum)[0]
+	j=_findPosition(blockNum)[i]
+	if len(blockList[i])!=j+1:					#如果blockNum是最後一個就不要做，因為沒得刪
+	for in range(len(blockList[i])-j-1):		#假設blockNum=7，[[0],[1],[2],[3],[4],[5,6,7,8,9]]，位置在(i=5,j=2)，要把7之後(8和9)放回去，for執行次數(len=5)-(j=2)-1=2步
 		#putBackNum=blockList[blockNum][-1]		#第5個一維陣列的最後一個
 		blockList[blockList[blockNum][-1]].append(blockList[blockNum][-1])	#把第5個一維陣列的最後一個值加到該值代表的一維陣列的最後面
 		del blockList[blockNum][-1]	#因為已經把值加到該去的地方了，所以把第5個索引的值移除
-"""
 
 #有錯的function XDDDD
 """
 def _pileBlock(blockNum1, blockNum2):
 		blockList[blockNum2].extend(blockList[blockNum1])
-	del blockList[blockNum1][-1] #delete last element in two dimension list
+	del blockList[blockNum1][-1] ]#delete last element in two dimension list
 
 def _moveBlock(blockNum1, blockNum2):
 	blockList[blockNum2].extend(blockList[blockNum1])
@@ -43,16 +50,25 @@ def _moveBlock(blockNum1, blockNum2):
 #移動block
 #要先找到blockNum1和blockNum2在二維陣列的位置，
 #def moveBlock(blockNum1, blockNum2):
-	
-
+		
 
 #輸入block數量，然後產生一個二維陣列
 num=int(input())
 _makeList(num)
 
+
+#test new function
+"""
+i=_findPosition(2)[0]
+j=_findPosition(2)[1]
+print(i)
+print(j)
+"""
+"""
 for i in range(len(blockList)):
 	for j in range(len(blockList[i])):
 		print(blockList[i][j].index(blockList[i][j]))
+"""
 
 while True:
 	command=input()
