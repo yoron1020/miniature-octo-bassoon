@@ -29,13 +29,12 @@ def _findPosition(blockNum):
 #歸位
 #要先找到blokNum1和blockNum2在二維陣列的位置
 def _initialBlock(blockNum): 
-	i=_findPosition(blockNum)[0]
-	j=_findPosition(blockNum)[i]
-	if len(blockList[i])!=j+1:					#如果blockNum是最後一個就不要做，因為沒得刪
-	for in range(len(blockList[i])-j-1):		#假設blockNum=7，[[0],[1],[2],[3],[4],[5,6,7,8,9]]，位置在(i=5,j=2)，要把7之後(8和9)放回去，for執行次數(len=5)-(j=2)-1=2步
-		#putBackNum=blockList[blockNum][-1]		#第5個一維陣列的最後一個
-		blockList[blockList[blockNum][-1]].append(blockList[blockNum][-1])	#把第5個一維陣列的最後一個值加到該值代表的一維陣列的最後面
-		del blockList[blockNum][-1]	#因為已經把值加到該去的地方了，所以把第5個索引的值移除
+	num=_findPosition(blockNum)	#findPosition回傳的值是tuple，所以可以用findPosition(blockNum)[0]去存取第一個值，[1]就是存取第二個值，以此類推
+	if len(blockList[num[0])!=num[j]+1:					#如果blockNum是最後一個就不要做，因為沒得刪
+		for in range(len(blockList[num[0]])-num[1]-1):		#假設blockNum=7，[[0],[1],[2],[3],[4],[5,6,7,8,9]]，位置在(i=5,j=2)，要把7之後(8和9)放回去，for執行次數(len=5)-(j=2)-1=2步
+			#putBackNum=blockList[blockNum][-1]		#第5個一維陣列的最後一個
+			blockList[blockList[blockNum][-1]].append(blockList[blockNum][-1])	#把第5個一維陣列的最後一個值加到該值代表的一維陣列的最後面
+			del blockList[blockNum][-1]	#因為已經把值加到該去的地方了，所以把第5個索引的值移除
 
 #有錯的function XDDDD
 """
@@ -47,10 +46,12 @@ def _moveBlock(blockNum1, blockNum2):
 	blockList[blockNum2].extend(blockList[blockNum1])
 """
 
-#移動block
+#移動block，把blockNum1移動到blockNum2上
 #要先找到blockNum1和blockNum2在二維陣列的位置，
-#def moveBlock(blockNum1, blockNum2):
-		
+def moveBlock(blockNum1, blockNum2):
+	num1=_findPosition(blockNum1)
+	num2=_findPosition(blockNum2)
+	blockList[num2[0]][num2[1]]
 
 #輸入block數量，然後產生一個二維陣列
 num=int(input())
